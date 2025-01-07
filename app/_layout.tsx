@@ -33,7 +33,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="(screens)/register" // matches register.tsx
         options={{
-          headerTitle: "Register",
+          headerShown: false,
         }}
       />
     </Stack>

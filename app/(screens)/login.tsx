@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import LoginForm from "../components/auth/LoginForm";
+import AlertModal from "../components/common/AlertModal";
 
 const { height } = Dimensions.get("window");
 

@@ -18,7 +18,7 @@ export const fetchImage = async () => {
 };
 
 const NASA_IMAGES_URL =
-  "https://images-api.nasa.gov/search?q=galaxy&media_type=image&page_size=6&year_start=2018";
+  "https://images-api.nasa.gov/search?q=galaxy&media_type=image&page_size=10&year_start=2018";
 //"https://images-api.nasa.gov/search?q=solar+system+OR+planets+OR+moons+OR+asteroids+OR+comets+OR+stars&media_type=image&page_size=6&year_start=2018";
 
 export const fetchGalaxyData = async () => {

@@ -1,20 +1,25 @@
-// Register.tsx
 import React from "react";
 import {
   View,
   Text,
   StyleSheet,
-  Pressable,
-  Alert,
   ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  Dimensions,
+  SafeAreaView,
 } from "react-native";
 import { useRouter } from "expo-router";
 import RegisterForm from "../components/auth/RegisterForm";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AlertModal from "../components/common/AlertModal";
+
+const { height } = Dimensions.get("window");
 
 export default function Register() {
   const router = useRouter();
 
+  const [modalVisible, setModalVisible] = React.useState(false);
   const handleRegister = async (
     firstName: string,
     lastName: string,
@@ -23,7 +28,6 @@ export default function Register() {
     confirmPassword: string
   ) => {
     try {
-      // Store user data
       const userData = {
         firstName,
         lastName,
@@ -35,76 +39,86 @@ export default function Register() {
       await AsyncStorage.setItem("userData", JSON.stringify(userData));
       await AsyncStorage.setItem("authToken", "dummy-auth-token");
 
-      Alert.alert("Success", "Registration successful!", [
-        {
-          text: "OK",
-          onPress: () => router.push("./login"),
-        },
-      ]);
+      setModalVisible(true); // Show modal on success
     } catch (error) {
-      Alert.alert("Error", "Registration failed. Please try again.");
       console.error(error);
     }
   };
 
   return (
-    <ImageBackground
-      source={require("../../assets/images/login_cover.jpg")}
-      style={styles.backgroundImage} // Use a separate background image style
-    >
-      <View style={styles.overlay}>
-        <RegisterForm onSubmit={handleRegister} />
-        <View style={styles.loginContainer}>
-          <Text style={styles.loginText}>Already have an account? </Text>
-          <Pressable onPress={() => router.push("./login")}>
-            <Text style={styles.loginLink}>Sign In</Text>
-          </Pressable>
-        </View>
-      </View>
-    </ImageBackground>
+    <SafeAreaView style={styles.safeArea}>
+      <ImageBackground
+        source={require("../../assets/images/tel.jpg")}
+        style={styles.container}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.keyboardView}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
+        >
+          <View style={styles.overlay}>
+            <View style={styles.headerContainer}>
+              <Text style={styles.title}>Join the Cosmos</Text>
+              <Text style={styles.subtitle}>Begin Your Space Journey</Text>
+            </View>
+
+            <View style={styles.bottomSection}>
+              <RegisterForm onSubmit={handleRegister} />
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </ImageBackground>
+
+      {/* Render AlertModal */}
+      <AlertModal
+        visible={modalVisible}
+        title="Success"
+        message="Registration successful!"
+        onConfirm={() => {
+          setModalVisible(false);
+          router.push("./login"); // Navigate to login screen
+        }}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
-  loginContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    paddingVertical: 20,
-  },
-  loginText: {
-    fontSize: 16,
-    color: "#fff",
-  },
-  loginLink: {
-    fontSize: 16,
-    color: "#1976d2",
-    fontWeight: "bold",
-  },
-  backgroundImage: {
+  keyboardView: {
     flex: 1,
-    resizeMode: "cover",
-    justifyContent: "center",
-    alignItems: "center",
   },
   overlay: {
     flex: 1,
-    justifyContent: "center",
-    width: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent dark overlay
-    padding: 20,
-    borderRadius: 10,
+    backgroundColor: "rgba(0, 0, 0, 0.30)",
+    justifyContent: "space-between",
+  },
+  headerContainer: {
+    paddingTop: height * 0.1, // Reduced from 0.15 to give more space
+    alignItems: "center",
+    paddingBottom: 20,
   },
   title: {
-    fontSize: 24,
-    marginBottom: 20,
+    fontSize: 32,
+    fontWeight: "bold",
     color: "#fff",
+    textAlign: "center",
   },
-  inputContainer: {
-    width: "100%",
-    marginBottom: 15,
+  subtitle: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.8)",
+    marginTop: 8,
+  },
+  bottomSection: {
+    flex: 1,
+    paddingTop: 30,
+    backgroundColor: "rgba(0, 0, 0, 0.75)",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
 });

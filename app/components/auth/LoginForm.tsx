@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   Pressable,
-  Alert,
   StyleSheet,
   Platform,
 } from "react-native";
@@ -17,6 +16,7 @@ import {
   validatePassword,
   validateForm,
 } from "../../utils/validation";
+import AlertModal from "../common/AlertModal"; // Import your AlertModal component
 
 export default function LoginForm() {
   const router = useRouter();
@@ -27,6 +27,9 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+
+  const [modalVisible, setModalVisible] = useState(false); // State for modal visibility
+  const [modalMessage, setModalMessage] = useState(""); // State to hold the modal message
 
   const checkUserExists = async (email: string) => {
     try {
@@ -89,7 +92,8 @@ export default function LoginForm() {
       const storedUserData = await AsyncStorage.getItem("userData");
 
       if (!storedUserData) {
-        Alert.alert("Error", "User not found");
+        setModalMessage("User not found. Please register first.");
+        setModalVisible(true);
         return;
       }
 
@@ -99,10 +103,12 @@ export default function LoginForm() {
         await AsyncStorage.setItem("authToken", "dummy-auth-token");
         router.push("./home");
       } else {
-        Alert.alert("Error", "Invalid email or password");
+        setModalMessage("Invalid email or password");
+        setModalVisible(true);
       }
     } catch (error) {
-      Alert.alert("Error", "Login failed. Please try again.");
+      setModalMessage("Login failed. Please try again.");
+      setModalVisible(true);
       console.error(error);
     }
   };
@@ -154,11 +160,19 @@ export default function LoginForm() {
       />
 
       <View style={styles.registerContainer}>
-        <Text style={styles.registerText}>New to the cosmos? </Text>
+        <Text style={styles.registerText}>Don’t have an account? </Text>
         <Pressable onPress={() => router.push("./register")}>
-          <Text style={styles.registerLink}>Create Account</Text>
+          <Text style={styles.registerLink}>Sign Up</Text>
         </Pressable>
       </View>
+
+      {/* Render AlertModal when modalVisible is true */}
+      <AlertModal
+        visible={modalVisible}
+        title="Login Error"
+        message={modalMessage}
+        onConfirm={() => setModalVisible(false)}
+      />
     </View>
   );
 }
@@ -204,7 +218,7 @@ const styles = StyleSheet.create({
   },
   registerLink: {
     fontSize: 14,
-    color: "#007AFF",
+    color: "#E3A538",
     fontWeight: "600",
   },
 });

@@ -1,6 +1,14 @@
-// RegisterForm.tsx
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Platform,
+  Pressable,
+  ScrollView,
+} from "react-native";
+import { useRouter } from "expo-router";
 import Button from "../common/Button";
 
 interface RegisterFormProps {
@@ -22,6 +30,7 @@ interface ValidationState {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -84,7 +93,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
       const newError = validateField(field, value);
       setErrors((prev) => ({ ...prev, [field]: newError }));
 
-      // Special case: also validate confirmPassword when password changes
       if (field === "password" && touched.confirmPassword) {
         const confirmError = validateField(
           "confirmPassword",
@@ -111,7 +119,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
       confirmPassword: "",
     };
 
-    // Validate all fields
     Object.keys(formData).forEach((field) => {
       const key = field as keyof typeof formData;
       const error = validateField(key, formData[key]);
@@ -146,97 +153,121 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <ScrollView
+      contentContainerStyle={styles.scrollContainer}
+      showsVerticalScrollIndicator={false}
+      bounces={false}
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={styles.container}>
-        <Text style={styles.title}>Create an Account</Text>
+        <View style={styles.inputSection}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[
+                styles.input,
+                touched.firstName && errors.firstName
+                  ? styles.inputError
+                  : null,
+              ]}
+              placeholder="First Name"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={formData.firstName}
+              onChangeText={(value) => handleChange("firstName", value)}
+              onBlur={() => handleBlur("firstName")}
+            />
+            {touched.firstName && errors.firstName ? (
+              <Text style={styles.errorText}>{errors.firstName}</Text>
+            ) : null}
+          </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[
-              styles.input,
-              touched.firstName && errors.firstName ? styles.inputError : null,
-            ]}
-            placeholder="First Name"
-            value={formData.firstName}
-            onChangeText={(value) => handleChange("firstName", value)}
-            onBlur={() => handleBlur("firstName")}
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[
+                styles.input,
+                touched.lastName && errors.lastName ? styles.inputError : null,
+              ]}
+              placeholder="Last Name"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={formData.lastName}
+              onChangeText={(value) => handleChange("lastName", value)}
+              onBlur={() => handleBlur("lastName")}
+            />
+            {touched.lastName && errors.lastName ? (
+              <Text style={styles.errorText}>{errors.lastName}</Text>
+            ) : null}
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[
+                styles.input,
+                touched.email && errors.email ? styles.inputError : null,
+              ]}
+              placeholder="Email"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={formData.email}
+              onChangeText={(value) => handleChange("email", value)}
+              onBlur={() => handleBlur("email")}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            {touched.email && errors.email ? (
+              <Text style={styles.errorText}>{errors.email}</Text>
+            ) : null}
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[
+                styles.input,
+                touched.password && errors.password ? styles.inputError : null,
+              ]}
+              placeholder="Password"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={formData.password}
+              onChangeText={(value) => handleChange("password", value)}
+              onBlur={() => handleBlur("password")}
+              secureTextEntry
+            />
+            {touched.password && errors.password ? (
+              <Text style={styles.errorText}>{errors.password}</Text>
+            ) : null}
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[
+                styles.input,
+                touched.confirmPassword && errors.confirmPassword
+                  ? styles.inputError
+                  : null,
+              ]}
+              placeholder="Confirm Password"
+              placeholderTextColor="rgba(255, 255, 255, 0.5)"
+              value={formData.confirmPassword}
+              onChangeText={(value) => handleChange("confirmPassword", value)}
+              onBlur={() => handleBlur("confirmPassword")}
+              secureTextEntry
+            />
+            {touched.confirmPassword && errors.confirmPassword ? (
+              <Text style={styles.errorText}>{errors.confirmPassword}</Text>
+            ) : null}
+          </View>
+
+          <Button
+            title="Create Account"
+            onPress={handleSubmit}
+            variant="secondary"
+            style={styles.registerButton}
           />
-          {touched.firstName && errors.firstName ? (
-            <Text style={styles.errorText}>{errors.firstName}</Text>
-          ) : null}
-        </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[
-              styles.input,
-              touched.lastName && errors.lastName ? styles.inputError : null,
-            ]}
-            placeholder="Last Name"
-            value={formData.lastName}
-            onChangeText={(value) => handleChange("lastName", value)}
-            onBlur={() => handleBlur("lastName")}
-          />
-          {touched.lastName && errors.lastName ? (
-            <Text style={styles.errorText}>{errors.lastName}</Text>
-          ) : null}
+          <View style={styles.loginContainer}>
+            <Text style={styles.loginText}>Already have an account? </Text>
+            <Pressable onPress={() => router.push("./login")}>
+              <Text style={styles.loginLink}>Sign In</Text>
+            </Pressable>
+          </View>
         </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[
-              styles.input,
-              touched.email && errors.email ? styles.inputError : null,
-            ]}
-            placeholder="Email"
-            value={formData.email}
-            onChangeText={(value) => handleChange("email", value)}
-            onBlur={() => handleBlur("email")}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          {touched.email && errors.email ? (
-            <Text style={styles.errorText}>{errors.email}</Text>
-          ) : null}
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[
-              styles.input,
-              touched.password && errors.password ? styles.inputError : null,
-            ]}
-            placeholder="Password"
-            value={formData.password}
-            onChangeText={(value) => handleChange("password", value)}
-            onBlur={() => handleBlur("password")}
-            secureTextEntry
-          />
-          {touched.password && errors.password ? (
-            <Text style={styles.errorText}>{errors.password}</Text>
-          ) : null}
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[
-              styles.input,
-              touched.confirmPassword && errors.confirmPassword
-                ? styles.inputError
-                : null,
-            ]}
-            placeholder="Confirm Password"
-            value={formData.confirmPassword}
-            onChangeText={(value) => handleChange("confirmPassword", value)}
-            onBlur={() => handleBlur("confirmPassword")}
-            secureTextEntry
-          />
-          {touched.confirmPassword && errors.confirmPassword ? (
-            <Text style={styles.errorText}>{errors.confirmPassword}</Text>
-          ) : null}
-        </View>
-
-        <Button title="Register" onPress={handleSubmit} variant="secondary" />
       </View>
     </ScrollView>
   );
@@ -245,41 +276,52 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
 const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: "center",
   },
   container: {
-    width: "100%",
-    padding: 20,
     backgroundColor: "transparent",
   },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    fontWeight: "bold",
-    color: "#fff", // Match with overlay
-    textAlign: "center",
+  inputSection: {
+    paddingHorizontal: 24,
+    paddingBottom: Platform.OS === "ios" ? 40 : 24,
   },
   inputContainer: {
-    width: "100%",
-    marginBottom: 15,
+    marginBottom: 20,
   },
   input: {
-    width: "100%",
-    height: 45,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    paddingLeft: 10,
-    borderRadius: 5,
-    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    height: 50,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    color: "#fff",
+    fontSize: 16,
   },
   inputError: {
-    borderColor: "#ff0000",
+    borderColor: "#ff3b30",
+    borderWidth: 1,
   },
   errorText: {
-    color: "#ff0000",
+    color: "#ff3b30",
     fontSize: 12,
     marginTop: 4,
     marginLeft: 4,
+  },
+  registerButton: {
+    marginTop: 10,
+    height: 50,
+  },
+  loginContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 15,
+  },
+  loginText: {
+    fontSize: 14,
+    color: "rgba(255, 255, 255, 0.8)",
+  },
+  loginLink: {
+    fontSize: 14,
+    color: "#E3A538",
+    fontWeight: "600",
   },
 });
 
