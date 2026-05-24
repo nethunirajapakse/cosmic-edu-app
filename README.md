@@ -17,6 +17,15 @@ This application is built based on the assigned domain corresponding to the last
 
 ---
 
+## 🔌 API Reference
+
+This application integrates with the **NASA Open APIs** to fetch real-time, public space data. The fetched dataset is dynamically rendered into the home screen's list view, showcasing imagery and descriptions directly from NASA's repositories.
+
+* **API Provider:** [NASA Open APIs](https://api.nasa.gov/)
+* **Data Fetched:** APOD (Astronomy Picture of the Day) / Media assets containing titles, dates, high-resolution imagery, and background descriptions.
+
+---
+
 ## ⚙️ Tech Stack & Libraries
 
 * **Framework:** [Expo](https://expo.dev/) (React Native)
@@ -56,10 +65,6 @@ Once the server is running, you can open the application via:
 
 ---
 
-
 ## 📸 Screenshots
-
-<img width="645" height="582" alt="Screenshot 2026-05-25 022010" src="https://github.com/user-attachments/assets/9993a78f-df8c-4d40-89ba-56e14d69944f" />
-
-<img width="604" height="570" alt="Screenshot 2026-05-25 022051" src="https://github.com/user-attachments/assets/d87acb87-0781-4c01-9eff-f262d15eabf5" />
-
+<img width="604" height="570" alt="Screenshot 2026-05-25 022051" src="https://github.com/user-attachments/assets/5b2b9824-79ae-4314-844c-8c9b6bec1987" />
+<img width="645" height="582" alt="Screenshot 2026-05-25 022010" src="https://github.com/user-attachments/assets/08dc1379-6eed-4247-9a75-8b0b80db72e4" />
