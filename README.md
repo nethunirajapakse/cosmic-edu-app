@@ -1,50 +1,91 @@
-# Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Mobile Application Development - Assignment 02
 
-## Get started
+[cite_start]A functional React Native mobile application built using the **Expo** framework and **file-based routing (`expo-router`)**[cite: 2, 11]. [cite_start]This project fulfills the requirements for Assignment 02 by implementing user authentication, dynamic data fetching from a public API, state-managed click tracking, and a responsive card-view layout[cite: 6, 7, 14, 15, 20, 21].
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 📌 Project Overview
 
-2. Start the app
+[cite_start]This application is built based on the assigned domain corresponding to the last digit of the student index[cite: 3]. 
 
-   ```bash
-    npx expo start
-   ```
+### Key Features Implemented:
+* [cite_start]**User Authentication System:** Secure and validated User Registration and Login forms utilizing React Hooks for state handling[cite: 7, 8, 9, 10].
+* [cite_start]**Dynamic Navigation:** Seamless page transitions using `expo-router`[cite: 11, 12]. [cite_start]Successfully passes the authenticated username to the Home screen top bar[cite: 13].
+* [cite_start]**Public API Integration:** Fetching and rendering a live dataset displayed in a structured Card View containing images, titles, descriptions, and status tags[cite: 14, 15].
+* [cite_start]**Global State Management:** A persistent floating action button at the bottom of the screen tracking and displaying the total item clicks across the session[cite: 20, 21].
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## ⚙️ Tech Stack & Libraries
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+* [cite_start]**Framework:** [Expo](https://expo.dev/) (React Native) [cite: 2]
+* [cite_start]**Routing & Navigation:** `expo-router` (File-based routing) [cite: 11]
+* [cite_start]**State Management:** Context API / Zustand / Redux (for click-count tracking) [cite: 21]
+* [cite_start]**Form Handling:** React Hooks with native validation [cite: 10]
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🚀 Getting Started
+
+### 1. Prerequisites
+Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### 2. Installation
+Clone the repository and install the project dependencies:
 
 ```bash
-npm run reset-project
+npm install
+
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 3. Running the Application
 
-## Learn more
+Start the Expo development server:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npx expo start
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
 
-## Join the community
+Once the server is running, you can open the application via:
 
-Join our community of developers creating universal apps.
+* **Android Emulator:** Press `a` in the terminal or configure via Android Studio.
+* **iOS Simulator:** Press `i` in the terminal (macOS required).
+* **Expo Go App:** Scan the QR code printed in the terminal using your physical mobile device.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+## 📁 Directory Structure
+
+The core codebase is organized within the `app` directory utilizing Expo's file-based routing architecture:
+
+```text
+app/
+├── index.tsx          - Initial route (Redirects to Login/Registration)
+├── (auth)/
+│   ├── login.tsx      - Authenticated Login Form with Validation
+│   └── register.tsx   - User Registration Form with Validation
+├── (tabs)/
+│   └── home.tsx       - Main Item List Home Page (Fetches Public API)
+└── _layout.tsx        - Global Layout Provider & State Context
+
+```
+
+---
+
+## 📝 Deliverables Checklist
+
+* [x] Public GitHub Repository Link 
+
+
+* [x] Screenshots of all implemented pages (Login, Registration, Home Screen with Username and Floating Button) 
+
+
+* [x] Screen-recorded video demonstration (Under 2 minutes) 
+
+
+<img width="604" height="570" alt="Screenshot 2026-05-25 022051" src="https://github.com/user-attachments/assets/9a651c77-8b31-44a7-8cc8-c3e0c199e798" />
+
+<img width="645" height="582" alt="Screenshot 2026-05-25 022010" src="https://github.com/user-attachments/assets/1a362cac-8566-4a58-bfe4-c3ea7bf4c0db" />
+
