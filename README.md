@@ -1,5 +1,5 @@
 
-# Mobile Application Development - Assignment 02
+# Mobile Application Development - Assignment
 
 A functional React Native mobile application built using the **Expo** framework and **file-based routing (`expo-router`)**. This project fulfills the requirements for Assignment 02 by implementing user authentication, dynamic data fetching from a public API, state-managed click tracking, and a responsive card-view layout.
 
@@ -56,23 +56,6 @@ Once the server is running, you can open the application via:
 
 ---
 
-## 📁 Directory Structure
-
-The core codebase is organized within the `app` directory utilizing Expo's file-based routing architecture:
-
-```text
-app/
-├── index.tsx          - Initial route (Redirects to Login/Registration)
-├── (auth)/
-│   ├── login.tsx      - Authenticated Login Form with Validation
-│   └── register.tsx   - User Registration Form with Validation
-├── (tabs)/
-│   └── home.tsx       - Main Item List Home Page (Fetches Public API)
-└── _layout.tsx        - Global Layout Provider & State Context
-
-```
-
----
 
 ## 📸 Screenshots
 
