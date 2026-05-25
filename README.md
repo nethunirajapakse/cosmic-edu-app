@@ -16,8 +16,8 @@ A functional React Native mobile application built using the **Expo** framework 
 ## App Preview
 
 <p align="center">
-  <img width="30%" src="https://github.com/user-attachments/assets/6c28b2ca-b17e-4ba4-9e25-c90110b688c6" alt="App Screenshot 1" style="margin-right: 10px;" />
-  <img width="30%" src="https://github.com/user-attachments/assets/934eadb0-5d88-4bdc-bdd8-35612e3e4b42" alt="App Screenshot 2" style="margin-right: 10px;" />
+  <img width="30%" src="https://github.com/user-attachments/assets/934eadb0-5d88-4bdc-bdd8-35612e3e4b42" alt="App Screenshot 1" style="margin-right: 10px;" />
+  <img width="30%" src="https://github.com/user-attachments/assets/6c28b2ca-b17e-4ba4-9e25-c90110b688c6" alt="App Screenshot 2" style="margin-right: 10px;" />
   <img width="30%" src="https://github.com/user-attachments/assets/e8d2567a-c9f1-48e7-bff0-5ac1e0ef1e6b" alt="App Screenshot 3" />
 </p>
 
