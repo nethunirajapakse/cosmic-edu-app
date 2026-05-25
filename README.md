@@ -5,17 +5,22 @@ A functional React Native mobile application built using the **Expo** framework 
 
 ---
 
-## 📌 Project Overview
-
-This application is built based on the assigned domain corresponding to the last digit of the student index. 
-
-### Key Features Implemented:
+## 📌 Key Features Implemented:
 * **User Authentication System:** Secure and validated User Registration and Login forms utilizing React Hooks for state handling.
 * **Dynamic Navigation:** Seamless page transitions using `expo-router`. Successfully passes the authenticated username to the Home screen top bar.
 * **Public API Integration:** Fetching and rendering a live dataset displayed in a structured Card View containing images, titles, descriptions, and status tags.
 * **Global State Management:** A persistent floating action button at the bottom of the screen tracking and displaying the total item clicks across the session.
 
 ---
+
+## App Preview
+
+<p align="center">
+  <img width="30%" src="https://github.com/user-attachments/assets/6c28b2ca-b17e-4ba4-9e25-c90110b688c6" alt="App Screenshot 1" style="margin-right: 10px;" />
+  <img width="30%" src="https://github.com/user-attachments/assets/934eadb0-5d88-4bdc-bdd8-35612e3e4b42" alt="App Screenshot 2" style="margin-right: 10px;" />
+  <img width="30%" src="https://github.com/user-attachments/assets/e8d2567a-c9f1-48e7-bff0-5ac1e0ef1e6b" alt="App Screenshot 3" />
+</p>
+
 
 ## 🔌 API Reference
 
@@ -65,6 +70,3 @@ Once the server is running, you can open the application via:
 
 ---
 
-## 📸 Screenshots
-<img width="604" height="570" alt="Screenshot 2026-05-25 022051" src="https://github.com/user-attachments/assets/5b2b9824-79ae-4314-844c-8c9b6bec1987" />
-<img width="645" height="582" alt="Screenshot 2026-05-25 022010" src="https://github.com/user-attachments/assets/08dc1379-6eed-4247-9a75-8b0b80db72e4" />
