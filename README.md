@@ -3,7 +3,6 @@
 
 A functional React Native mobile application built using the **Expo** framework and **file-based routing (`expo-router`)**. This project fulfills the requirements for Assignment 02 by implementing user authentication, dynamic data fetching from a public API, state-managed click tracking, and a responsive card-view layout.-->
 
----
 # CosmoPulse
 
 ## 📌 Key Features Implemented:
